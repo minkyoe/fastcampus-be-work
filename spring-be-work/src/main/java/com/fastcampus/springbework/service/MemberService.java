@@ -1,5 +1,6 @@
 package com.fastcampus.springbework.service;
 
+import com.fastcampus.springbework.domain.Member;
 import com.fastcampus.springbework.dto.MemberResponseDto;
 import com.fastcampus.springbework.dto.MemberSaveRequestDto;
 import com.fastcampus.springbework.repository.MemberRepository;
@@ -21,11 +22,9 @@ public class MemberService {
         return memberRepository.save(requestDto.toEntity()).getId();
     }
 
-//    public List<MemberResponseDto> findAll() {
-//        return memberRepository.findAll()
-//                .stream()
-//                .map(MemberResponseDto::new)
-//                .collect(Collectors.toList());
-//    }
+    @Transactional
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
 
 }
