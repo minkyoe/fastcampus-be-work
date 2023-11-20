@@ -1,5 +1,6 @@
 package com.fastcampus.springbework.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 public class Member {
 
     @Id
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,13 +29,18 @@ public class Member {
     @CreatedDate
     private String joinedDate;
 
-//    private Team team;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "team_id")
+    private Team team;
+
 
     @Builder
-    public Member(String firstName, String lastName, String address, String joinedDate) {
+    public Member(String firstName, String lastName, String address, String joinedDate, Team team) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.joinedDate = joinedDate;
+        this.team = team;
     }
 }
