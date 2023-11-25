@@ -70,6 +70,7 @@ public class MainController {
         }
     }
 
+    // 멤버 개별 수정
     @PutMapping("/member")
     public ResponseDto updateMember(@RequestBody MemberUpdateRequestDto requestDto) {
         try {
@@ -79,6 +80,7 @@ public class MainController {
         }
     }
 
+    // 팀 개별 수정
     @PutMapping("/team")
     public ResponseDto updateTeam(@RequestBody TeamUpdateRequestDto requestDto) {
         try {
