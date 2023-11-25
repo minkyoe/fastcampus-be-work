@@ -5,12 +5,15 @@ import com.fastcampus.springbework.domain.Member;
 import com.fastcampus.springbework.domain.Team;
 import com.fastcampus.springbework.dto.MemberResponseDto;
 import com.fastcampus.springbework.dto.MemberSaveRequestDto;
+import com.fastcampus.springbework.dto.ResponseDto;
 import com.fastcampus.springbework.dto.TeamSaveRequestDto;
 import com.fastcampus.springbework.service.MemberService;
 import java.util.*;
 
 import com.fastcampus.springbework.service.TeamService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -21,8 +24,13 @@ public class MainController {
 
     // 멤버 등록
     @PostMapping("/member")
-    public Long save(@RequestBody MemberSaveRequestDto requestDto) {
-        return memberService.save(requestDto);
+    public ResponseDto save(@RequestBody MemberSaveRequestDto requestDto) {
+        try {
+            Long memberId = memberService.save(requestDto);
+            return new ResponseDto("SUCCESS", "멤버 등록 성공", memberService.findById(memberId));
+        } catch (Exception e) {
+            return new ResponseDto("FAIL", e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // 모든 멤버 조회
@@ -33,8 +41,13 @@ public class MainController {
 
     // 멤버 개별 조회
     @GetMapping("/member/{id}")
-    public Member findMember(@PathVariable Long id) {
-        return memberService.findById(id);
+    public ResponseDto findMember(@PathVariable Long id) {
+        try {
+            Member member = memberService.findById(id);
+            return new ResponseDto("SUCCESS", "멤버 조회 성공", member);
+        } catch (Exception e) {
+            return new ResponseDto("FAIL", e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // 팀 등록
@@ -51,7 +64,12 @@ public class MainController {
 
     // 팀 개별 조회
     @GetMapping("/team/{id}")
-    public Team findTeam(@PathVariable Long id) {
-        return teamService.findById(id);
+    public ResponseDto findTeam(@PathVariable Long id) {
+        try {
+            Team team = teamService.findById(id);
+            return new ResponseDto("SUCCESS", "팀 조회 성공", team);
+        } catch (Exception e) {
+            return new ResponseDto("FAIL", e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
