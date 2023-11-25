@@ -78,4 +78,13 @@ public class MainController {
             return new ResponseDto("FAIL", e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/team")
+    public ResponseDto updateTeam(@RequestBody TeamUpdateRequestDto requestDto) {
+        try {
+            return new ResponseDto("SUCCESS", "팀 개별 수정 성공", teamService.updateTeam(requestDto));
+        } catch (Exception e) {
+            return new ResponseDto("FAIL", e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

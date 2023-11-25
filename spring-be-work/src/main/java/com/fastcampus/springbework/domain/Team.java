@@ -1,5 +1,6 @@
 package com.fastcampus.springbework.domain;
 
+import com.fastcampus.springbework.dto.TeamUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +41,10 @@ public class Team {
 
     public void putMember(Member member) {
         this.members.add(member);
+    }
+
+    public void updateTeam (TeamUpdateRequestDto dto) {
+        this.name = dto.getName();
+        this.location = dto.getLocation();
     }
 }

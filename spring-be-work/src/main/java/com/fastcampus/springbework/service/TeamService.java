@@ -4,6 +4,7 @@ import com.fastcampus.springbework.domain.Member;
 import com.fastcampus.springbework.domain.Team;
 import com.fastcampus.springbework.dto.MemberSaveRequestDto;
 import com.fastcampus.springbework.dto.TeamSaveRequestDto;
+import com.fastcampus.springbework.dto.TeamUpdateRequestDto;
 import com.fastcampus.springbework.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,13 @@ public class TeamService {
     @Transactional
     public List<Team> findAll() {
         return teamRepository.findAll();
+    }
+
+    @Transactional
+    public Team updateTeam(TeamUpdateRequestDto requestDto) {
+        Team team = teamRepository.findById(requestDto.getTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 Team이 존재하지 않습니다."));
+        team.updateTeam(requestDto);
+        return team;
     }
 }
