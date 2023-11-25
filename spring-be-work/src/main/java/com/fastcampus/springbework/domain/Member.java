@@ -1,5 +1,6 @@
 package com.fastcampus.springbework.domain;
 
+import com.fastcampus.springbework.dto.MemberUpdateRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,5 +43,11 @@ public class Member {
         this.address = address;
         this.joinedDate = joinedDate;
         this.team = team;
+    }
+
+    public void updateMember (MemberUpdateRequestDto dto) {
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+        this.address = dto.getAddress();
     }
 }

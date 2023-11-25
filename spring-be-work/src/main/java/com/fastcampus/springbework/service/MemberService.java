@@ -4,6 +4,7 @@ import com.fastcampus.springbework.domain.Member;
 import com.fastcampus.springbework.domain.Team;
 import com.fastcampus.springbework.dto.MemberResponseDto;
 import com.fastcampus.springbework.dto.MemberSaveRequestDto;
+import com.fastcampus.springbework.dto.MemberUpdateRequestDto;
 import com.fastcampus.springbework.repository.MemberRepository;
 import com.fastcampus.springbework.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,4 +47,11 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    @Transactional
+    public Member updateMember(MemberUpdateRequestDto requestDto) {
+        Member member = memberRepository.findById(requestDto.getMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 Member가 존재하지 않습니다."));
+        member.updateMember(requestDto);
+        return member;
+    }
 }
