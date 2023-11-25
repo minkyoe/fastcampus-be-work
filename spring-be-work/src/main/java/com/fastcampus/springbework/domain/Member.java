@@ -29,9 +29,9 @@ public class Member {
     @CreatedDate
     private String joinedDate;
 
-    @ManyToOne
-    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
+    @JsonIgnore
     private Team team;
 
 

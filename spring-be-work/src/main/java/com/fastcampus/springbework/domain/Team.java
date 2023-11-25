@@ -27,7 +27,7 @@ public class Team {
     @CreatedDate
     private String foundedDate;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     private List<Member> members = new ArrayList<>();
 
@@ -36,6 +36,9 @@ public class Team {
         this.name = name;
         this.location = location;
         this.foundedDate = foundedDate;
-//        this.members = members;
+    }
+
+    public void putMember(Member member) {
+        this.members.add(member);
     }
 }

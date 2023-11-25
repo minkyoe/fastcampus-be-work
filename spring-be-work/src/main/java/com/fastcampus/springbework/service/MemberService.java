@@ -22,14 +22,23 @@ public class MemberService {
 
     @Transactional
     public Long save(MemberSaveRequestDto requestDto) {
-        Team team = teamRepository.findById(requestDto.getTeamId()).get();
+        Team team = teamRepository.findById(requestDto.getTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 Team이 존재하지 않습니다."));
+
         Member member = Member.builder()
                 .lastName(requestDto.getLastName())
                 .firstName(requestDto.getFirstName())
                 .address(requestDto.getAddress())
                 .team(team)
                 .build();
+
         return memberRepository.save(member).getId();
+    }
+
+    @Transactional
+    public Member findById(Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 Member가 존재하지 않습니다."));
     }
 
     @Transactional

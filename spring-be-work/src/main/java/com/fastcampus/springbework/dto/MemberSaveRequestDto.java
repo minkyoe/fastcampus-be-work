@@ -14,16 +14,14 @@ public class MemberSaveRequestDto {
     private String lastName;
     private String address;
     private String joinedDate;
-    private Team team;
     private Long teamId;
 
     @Builder
-    public MemberSaveRequestDto(String firstName, String lastName, String address, String joinedDate, Team team) {
+    public MemberSaveRequestDto(String firstName, String lastName, String address, String joinedDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.joinedDate = joinedDate;
-        this.team = team;
     }
 
     public Member toEntity() {
@@ -32,7 +30,6 @@ public class MemberSaveRequestDto {
                 .lastName(lastName)
                 .address(address)
                 .joinedDate(joinedDate)
-                .team(team)
                 .build();
     }
 }
