@@ -16,10 +16,11 @@ public class TeamSaveRequestDto {
     private List<MemberSaveRequestDto> members;
 
     @Builder
-    public TeamSaveRequestDto(String name, String location, String foundedDate) {
+    public TeamSaveRequestDto(String name, String location, String foundedDate, List<MemberSaveRequestDto> members) {
         this.name = name;
         this.location = location;
         this.foundedDate = foundedDate;
+        this.members = members;
     }
 
     public Team toEntity(){
